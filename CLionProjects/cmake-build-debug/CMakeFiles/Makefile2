@@ -63,16 +63,16 @@ RM = "C:\Program Files\JetBrains\CLion 2020.2.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\GitHub\Coding-HWs\CLionProjects\arabicToRoman
+CMAKE_SOURCE_DIR = E:\GitHub\Coding-HWs\CLionProjects
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\GitHub\Coding-HWs\CLionProjects\arabicToRoman\cmake-build-debug
+CMAKE_BINARY_DIR = E:\GitHub\Coding-HWs\CLionProjects\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/arabicToRoman.dir/all
+all: CMakeFiles/CLionProjects.dir/all
 
 .PHONY : all
 
@@ -82,36 +82,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/arabicToRoman.dir/clean
+clean: CMakeFiles/CLionProjects.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/arabicToRoman.dir
+# Target rules for target CMakeFiles/CLionProjects.dir
 
 # All Build rule for target.
-CMakeFiles/arabicToRoman.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\arabicToRoman.dir\build.make CMakeFiles/arabicToRoman.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\arabicToRoman.dir\build.make CMakeFiles/arabicToRoman.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=E:\GitHub\Coding-HWs\CLionProjects\arabicToRoman\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target arabicToRoman"
-.PHONY : CMakeFiles/arabicToRoman.dir/all
+CMakeFiles/CLionProjects.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CLionProjects.dir\build.make CMakeFiles/CLionProjects.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CLionProjects.dir\build.make CMakeFiles/CLionProjects.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=E:\GitHub\Coding-HWs\CLionProjects\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Built target CLionProjects"
+.PHONY : CMakeFiles/CLionProjects.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/arabicToRoman.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\arabicToRoman\cmake-build-debug\CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/arabicToRoman.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\arabicToRoman\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/arabicToRoman.dir/rule
+CMakeFiles/CLionProjects.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\cmake-build-debug\CMakeFiles 21
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/CLionProjects.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles/CLionProjects.dir/rule
 
 # Convenience name for target.
-arabicToRoman: CMakeFiles/arabicToRoman.dir/rule
+CLionProjects: CMakeFiles/CLionProjects.dir/rule
 
-.PHONY : arabicToRoman
+.PHONY : CLionProjects
 
 # clean rule for target.
-CMakeFiles/arabicToRoman.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\arabicToRoman.dir\build.make CMakeFiles/arabicToRoman.dir/clean
-.PHONY : CMakeFiles/arabicToRoman.dir/clean
+CMakeFiles/CLionProjects.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CLionProjects.dir\build.make CMakeFiles/CLionProjects.dir/clean
+.PHONY : CMakeFiles/CLionProjects.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
