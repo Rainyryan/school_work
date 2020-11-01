@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-int main() {
-    signed int k;
+int main(){
+    int k;
     char s[100]={0};
     scanf("%d\n",&k);
     scanf("%[^\n]%*c",s);
