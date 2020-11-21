@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.2.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\sister_s_noise.dir/objects.a
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe cr CMakeFiles\sister_s_noise.dir/objects.a @CMakeFiles\sister_s_noise.dir\objects1.rsp
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\sister_s_noise.dir/objects.a -Wl,--no-whole-archive  -o sister_s_noise.exe -Wl,--out-implib,libsister_s_noise.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\sister_s_noise.dir\linklibs.rsp

@@ -1,0 +1,3 @@
+E:/GitHub/Coding-HWs/CLionProjects/sister's noise/cmake-build-debug/CMakeFiles/sister_s_noise.dir
+E:/GitHub/Coding-HWs/CLionProjects/sister's noise/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/GitHub/Coding-HWs/CLionProjects/sister's noise/cmake-build-debug/CMakeFiles/rebuild_cache.dir

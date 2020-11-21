@@ -1,25 +1,26 @@
 #include <stdio.h>
 
 int main(){
-    int k;
-    char s[200]={0};
+    int k,ch;
+    char s[1000]={0};
     scanf("%d\n",&k);
     //scanf("%[^\n]%*c",s);
-    fgets(s,100,stdin);
+    fgets(s,1000,stdin);
     k=k%26;
     //printf("%d\n",k);
-    for( int i = 0; s[i] != '\n' ; i++){
-        if((s[i]<='Z'&&s[i]>='A')){
-            s[i]+=k;
-            if(s[i]>'Z'){s[i]-=26;}
-            if(s[i]<'A'){s[i]+=26;}
+    for( int i = 0; s[i] != '\n'; i++){
+        ch = s[i];
+        if(ch<='Z'&&ch>='A'){
+            ch+=k;
+            if(ch>'Z'){ch-=26;}
+            if(ch<'A'){ch+=26;}
         }
-        if((s[i]<='z'&&s[i]>='a')){
-            s[i]+=k;
-            if(s[i]>'z'){s[i]-=26;}
-            if(s[i]<'a'){s[i]+=26;}
+        if(ch<='z'&&ch>='a'){
+            ch+=k;
+            if(ch>'z'){ch-=26;}
+            if(ch<'a'){ch+=26;}
         }
-        printf("%c",s[i]);
+        printf("%c",ch);
     }
     return 0;
 }
