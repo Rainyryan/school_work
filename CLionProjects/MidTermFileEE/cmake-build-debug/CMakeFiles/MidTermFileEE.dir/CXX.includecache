@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/GitHub/Coding-HWs/CLionProjects/MidTermFileEE/main.cpp
+vector
+-
+set
+-
+map
+-
+string
+-
+iostream
+-
+fstream
+-
+algorithm
+-
+math.h
+-
+iomanip
+-
+string.h
+-
+sstream
+-
+Strategy.h
+E:/GitHub/Coding-HWs/CLionProjects/MidTermFileEE/Strategy.h
+
