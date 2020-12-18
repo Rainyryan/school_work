@@ -93,12 +93,12 @@ clean: CMakeFiles/recursiveFormula.dir/clean
 CMakeFiles/recursiveFormula.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\recursiveFormula.dir\build.make CMakeFiles/recursiveFormula.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\recursiveFormula.dir\build.make CMakeFiles/recursiveFormula.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=E:\GitHub\Coding-HWs\CLionProjects\recursiveFormula\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target recursiveFormula"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=E:\GitHub\Coding-HWs\CLionProjects\recursiveFormula\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target recursiveFormula"
 .PHONY : CMakeFiles/recursiveFormula.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/recursiveFormula.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\recursiveFormula\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\recursiveFormula\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/recursiveFormula.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start E:\GitHub\Coding-HWs\CLionProjects\recursiveFormula\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/recursiveFormula.dir/rule

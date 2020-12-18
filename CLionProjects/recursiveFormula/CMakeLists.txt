@@ -3,4 +3,4 @@ project(recursiveFormula C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(recursiveFormula main.c)
+add_executable(recursiveFormula main.c test.c)

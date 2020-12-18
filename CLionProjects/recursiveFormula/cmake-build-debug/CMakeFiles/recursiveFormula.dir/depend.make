@@ -3,3 +3,5 @@
 
 CMakeFiles/recursiveFormula.dir/main.c.obj: ../main.c
 
+CMakeFiles/recursiveFormula.dir/test.c.obj: ../test.c
+

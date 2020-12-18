@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "E:/GitHub/Coding-HWs/CLionProjects/recursiveFormula/main.c" "E:/GitHub/Coding-HWs/CLionProjects/recursiveFormula/cmake-build-debug/CMakeFiles/recursiveFormula.dir/main.c.obj"
+  "E:/GitHub/Coding-HWs/CLionProjects/recursiveFormula/test.c" "E:/GitHub/Coding-HWs/CLionProjects/recursiveFormula/cmake-build-debug/CMakeFiles/recursiveFormula.dir/test.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

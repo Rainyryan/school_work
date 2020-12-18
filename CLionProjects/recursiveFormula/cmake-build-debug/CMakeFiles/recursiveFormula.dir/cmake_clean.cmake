@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/recursiveFormula.dir/main.c.obj"
+  "CMakeFiles/recursiveFormula.dir/test.c.obj"
   "librecursiveFormula.dll.a"
   "recursiveFormula.exe"
   "recursiveFormula.exe.manifest"
