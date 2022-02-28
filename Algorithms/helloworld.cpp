@@ -9,5 +9,5 @@ int main(){
     cout<<"hi"<<endl;
     cin >> size;
     cout<<size<<endl;
-    std::vector<std::vector<int>> ref(size);
+    std::vector< std::vector<int> > ref(size);
 }
