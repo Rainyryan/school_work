@@ -5,33 +5,25 @@
 using namespace std;
 
 int main(){
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(NULL);
 
     int N, M;
+    
     cin>>N>>M;
+    cout<<"enter values"<<endl;
     
     
     string command;
-    vector<list<int>> pos;
-    
-    //vector<list<int>>::iterator i;
-    
+    vector< list<int> > pos(N);
 
-    // int a = 1;
+    for(int i = 0; i < pos.size(); i++){
+        pos[i].push_back(i+1);
+        }
     
-    // for(i=pos.begin(); i!=pos.end(); i++){
-    //     i->push_back(a++);
-    // }
-
-    
-    for(int i = 0; i < N; i++){
-        list<int> a;
-        a.push_back(i+1);
-        pos.push_back(a);
+    for(auto l : pos){
+        cout<<l.front()<<endl;
     }
-    for(auto i : pos){
-        cout<<i.front();
-    }
-    
     
     // while(M--){
     //     cin>>command;
@@ -44,7 +36,5 @@ int main(){
     //     }
     
     // }
-
-
 
 }
