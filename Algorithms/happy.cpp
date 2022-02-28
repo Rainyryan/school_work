@@ -9,9 +9,7 @@ int main(){
     cin.tie(NULL);
 
     int N, M;
-    
     cin>>N>>M;
-    cout<<"enter values"<<endl;
     
     vector<int> posOf(N+1);
     stack<int> temp;
@@ -21,10 +19,6 @@ int main(){
         pile[i].push(i+1);
         posOf[i+1] = i;
         }
-    
-    // for(auto l : pile){
-    //     cout<<l.top();
-    // }
     
     string token;
     bool move;
@@ -92,7 +86,7 @@ int main(){
             pile[posOf[b]].push(a);
             pile[posOf[a]].pop();
             posOf[a] = posOf[b];
-        };
+        }
         if(!move && !onto){
             while(pile[posOf[a]].top() != a){
                 int top = pile[posOf[a]].top();
@@ -107,17 +101,30 @@ int main(){
                 pile[posOf[b]].push(top);
                 posOf[top] = posOf[b];
             }
-        };
+        }
     }
-    int i = 1;
-    for(auto l : pile){
-        cout<<i++<<".";
-        while(!l.empty()){
-            temp.push(l.top());
-            l.pop();
+    // int i = 1;
+    // for(auto l : pile){
+    //     cout<<i++<<": ";
+    //     while(!l.empty()){
+    //         temp.push(l.top());
+    //         l.pop();
+    //     }
+    //     while(!temp.empty()){
+    //         cout<<temp.top()<<" ";
+    //         temp.pop();
+    //     }
+    //     cout<<endl;
+    // }
+
+    for(int i = 0; i < pile.size(); i++){
+        cout<<i+1<<":";
+        while(!pile[i].empty()){
+            temp.push(pile[i].top());
+            pile[i].pop();
         }
         while(!temp.empty()){
-            cout<<temp.top();
+            cout<<" "<<temp.top();
             temp.pop();
         }
         cout<<endl;
@@ -137,4 +144,25 @@ move 4 onto 9
 pile 10 over 10 
 move 9 onto 2 
 pile 3 onto 7
+
+1: 1 
+2: 2 9 
+3: 
+4: 4 
+5: 5 
+6: 6 8 
+7: 7 3 
+8: 
+9: 
+10: 10 
+
+10 8
+move 9 onto 1
+move 8 over 1
+move 7 over 1
+move 6 over 1
+pile 8 over 6
+pile 8 over 5
+move 2 over 1
+move 4 over 9
 */
