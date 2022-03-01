@@ -37,7 +37,7 @@ int main(){
         cin>>token;
         b = stoi(token);
 
-        if(a == b) continue;
+        if(posOf[a] == posOf[b]) continue;
         if(move && onto){
             while(pile[posOf[a]].top() != a){
                 int top = pile[posOf[a]].top();
@@ -103,19 +103,6 @@ int main(){
             }
         }
     }
-    // int i = 1;
-    // for(auto l : pile){
-    //     cout<<i++<<": ";
-    //     while(!l.empty()){
-    //         temp.push(l.top());
-    //         l.pop();
-    //     }
-    //     while(!temp.empty()){
-    //         cout<<temp.top()<<" ";
-    //         temp.pop();
-    //     }
-    //     cout<<endl;
-    // }
 
     for(int i = 0; i < pile.size(); i++){
         cout<<i+1<<":";
