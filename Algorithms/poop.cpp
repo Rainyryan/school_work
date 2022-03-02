@@ -33,16 +33,19 @@ int main(){
             }
         }else{
             cin>>a>>b;
-            /*if(Mem.size() > N){
+            if(Mem.size() == N){
                 Mem.erase(V.front());
                 V.erase(V.begin());
-            }*/
-            cout<<"where";
+            }
             Mem[a] = b;
+            for(auto it = V.begin(); it != V.end(); it++)
+                    if(*it == a)
+                        V.erase(it);
             V.push_back(a);
-            
-            for(int i = 0; i < V.size(); i++)
-                cout<<" "<<i;
+            cout<<"----------"<<endl;
+             for(auto i : V)
+                 cout<<i<<" ";
+            cout<<endl<<"---------"<<endl;
         }
     }
 }
