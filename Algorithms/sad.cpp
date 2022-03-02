@@ -19,6 +19,9 @@ int getIndex(set<int> s){
 }
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     stack<int> S;
     int N;
     cin>>N;
