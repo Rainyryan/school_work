@@ -4,7 +4,7 @@
 
 using namespace std;
 
-unordered_map<int, pair<int, int> > Map;
+unordered_map<int, pair<int, vector<int>::iterator> > Map;
 vector<int> V;
 
 int main(){
@@ -13,6 +13,7 @@ int main(){
     
     int N, M;
     cin>>N>>M;
+    V.reserve(N+1);
 
     string C;
     int a, b;
@@ -21,22 +22,32 @@ int main(){
         cin>>C>>a;
         if(C[0]=='s'){
             cin>>b;
-            if(Map.count(a)) V.erase(V.begin()+Map[a].second);
+            if(Map.count(a)){
+                V.erase(Map[a].second);
+                for(auto it = Map[a].second; it != V.end(); it++) Map[*it].second--;
+            }
             V.push_back(a);
-            Map[a] = make_pair(b, V.size()-1);
+            Map[a] = make_pair(b, prev(V.end()));
         }else{
             if(Map.count(a)){
                 cout<<Map[a].first<<endl;
-                V.erase(V.begin()+Map[a].second);
+                V.erase(Map[a].second);
+                for(auto it = Map[a].second; it != V.end(); it++) Map[*it].second--;
                 V.push_back(a);
-                Map[a].second = V.size();
+                Map[a].second = prev(V.end());
             }else 
                 cout<<"-1"<<endl;
         }
         if(V.size() > N){
             Map.erase(V.front());
             V.erase(V.begin());
+            for(auto it = V.begin(); it != V.end(); it++) Map[*it].second--;
         }
+        // cout<<"V:";
+        // for(auto it = V.begin(); it != V.end(); it++)
+        //      cout<<*it<<" ";
+        // cout<<endl;
+
     }
 }
 

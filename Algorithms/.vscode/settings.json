@@ -1,6 +1,5 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled",
-    "files.associations": {
+  "files.associations": {
         "iostream": "cpp",
         "list": "cpp",
         "vector": "cpp",
@@ -40,5 +39,6 @@
       "vim.handleKeys": {
         "<C-a>": false,
         "<C-f>": false
-    } 
+    },
+    "files.autoSave": "afterDelay"
 }
