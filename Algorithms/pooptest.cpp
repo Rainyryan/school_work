@@ -1,11 +1,11 @@
 #include <iostream>
 #include <unordered_map>
-#include <deque>
+#include <vector>
 
 using namespace std;
 
-unordered_map<int, int> Map;
-deque<int> Dq;
+unordered_map<int, pair<int, int> > Map;
+vector<int> V;
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -16,31 +16,26 @@ int main(){
 
     string C;
     int a, b;
-
+    
     while(M--){
         cin>>C>>a;
         if(C[0]=='s'){
             cin>>b;
-            if(Map.count(a)){
-                auto it = Dq.begin();
-                while(*it != a) it++;
-                Dq.erase(it);
-            }
-            Map[a] = b;
-            Dq.push_back(a);
+            if(Map.count(a)) V.erase(V.begin()+Map[a].second);
+            V.push_back(a);
+            Map[a] = make_pair(b, V.size()-1);
         }else{
             if(Map.count(a)){
-                cout<<Map[a]<<endl;
-                auto it = Dq.begin();
-                while(*it != a) it++;
-                Dq.erase(it);
-                Dq.push_back(a);
+                cout<<Map[a].first<<endl;
+                V.erase(V.begin()+Map[a].second);
+                V.push_back(a);
+                Map[a].second = V.size();
             }else 
                 cout<<"-1"<<endl;
         }
-        if(Dq.size() > N){
-            Map.erase(Dq.front());
-            Dq.pop_front();
+        if(V.size() > N){
+            Map.erase(V.front());
+            V.erase(V.begin());
         }
     }
 }
