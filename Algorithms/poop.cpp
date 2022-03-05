@@ -1,13 +1,12 @@
 #include <iostream>
 #include <unordered_map>
-#include <map>
 #include <list>
 
 using namespace std;
 
 unordered_map<int, int> Map;
+unordered_map<int, list<int>::iterator> AinDq;
 list<int> Dq;
-map<int, list<int>::iterator> AinDq; 
 
 int main(){
     ios_base::sync_with_stdio(false);
