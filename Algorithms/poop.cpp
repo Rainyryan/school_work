@@ -4,8 +4,7 @@
 
 using namespace std;
 
-unordered_map<int, int> Map;
-unordered_map<int, list<int>::iterator> AinDq;
+unordered_map<int, pair<int, list<int>::iterator> > Map;
 list<int> Dq;
 
 int main(){
@@ -24,22 +23,21 @@ int main(){
         cin>>C>>a;
         if(C[0]=='s'){
             cin>>b;
-            if(Map.count(a)) Dq.erase(AinDq[a]);
-            Map[a] = b;
+            if(Map.count(a)) Dq.erase(Map[a].second);
+            Map[a].first = b;
             Dq.push_back(a);
-            AinDq[a] = prev(Dq.end());
+            Map[a].second = prev(Dq.end());
         }else{
             if(Map.count(a)){
-                cout<<Map[a]<<endl;
-                Dq.erase(AinDq[a]);
+                cout<<Map[a].first<<endl;
+                Dq.erase(Map[a].second);
                 Dq.push_back(a);
-                AinDq[a] = prev(Dq.end());
+                Map[a].second = prev(Dq.end());
             }else 
                 cout<<"-1"<<endl;
         }
         if(Map.size() > N){
             Map.erase(Dq.front());
-            AinDq.erase(Dq.front());
             Dq.pop_front();
         }
     }
