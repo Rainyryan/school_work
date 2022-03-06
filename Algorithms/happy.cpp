@@ -114,7 +114,7 @@ int main(){
             cout<<" "<<temp.top();
             temp.pop();
         }
-        cout<<endl;
+        cout<<'\n';
     }
 
 }
