@@ -1,22 +1,13 @@
 #include <set>
 #include <stack>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 #include <iostream>
 
 using namespace std;
 
-map< set<int>, int > Index;
-vector< set<int> > Set;
-
-int getIndex(set<int> s){
-    if(!Index.count(s)){
-        Set.push_back(s);
-        Index[s] = Set.size()-1;
-    }
-    return Index[s];
-}
+unordered_map<set<int>, int> Set;
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -29,7 +20,7 @@ int main(){
     while(N--){
         cin>>C;
         if(C[0] == 'P'){
-            S.push(getIndex(set<int>()));
+            S.push(Set[{}]);
         }
         else if(C[0] == 'D'){
             S.push(S.top());
@@ -72,4 +63,4 @@ DUP
 ADD 
 INTERSECT 
 ADD
-*/
+*
