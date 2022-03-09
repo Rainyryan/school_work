@@ -65,6 +65,8 @@ void merge_count(int* a, long n){
 }
 
 int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     int N,a;
     cin>>N;
     V.reserve(N);
