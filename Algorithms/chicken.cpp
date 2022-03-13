@@ -3,9 +3,7 @@
 
 using namespace std;
 
-
-void combination(vector<int> &V, vector<int> &tmp, int start, int end, int index, int r)
-{
+void combination(vector<int> &V, vector<int> &tmp, int start, int end, int index, int &r){
     if(index == r){
         for(int j = 0; j < index; ++j) cout<<tmp[j]<<" ";
         cout<<'\n';
@@ -17,19 +15,26 @@ void combination(vector<int> &V, vector<int> &tmp, int start, int end, int index
     }
 }
 
+void combination2(vector<int> &V, int k){
+  for(int i = 0; i < k; ++i) cout<<V[i]<<" ";
+  cout<<'\n';
+
+
+}
+
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  int N,a;
-  vector<int> V, d;
+  int N,a, R = 6;
+  vector<int> V, tmp;
   cin>>N;
+  V.reserve(N);
+  tmp.reserve(N);
   while(N--){
     cin>>a;
     V.push_back(a);
   }
-  vector<int> tmp;
-  tmp.reserve(V.size());
-  combination(V, tmp, 0, V.size(), 0, 6);
+  combination(V, tmp, 0, V.size(), 0, R);
 }
 
 /*
