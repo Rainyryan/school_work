@@ -16,20 +16,28 @@ int main(){
         cin>>a;
         LS.push_back(MS.insert(a));
     }
+    auto it = MS.begin();
+    advance(it, K-1);
     for(int i = 0; i < N-M+1; ++i){
-        auto it = MS.begin();
-        advance(it, K-1);
         cout<<*it<<' ';
         if(i == N-M) break;
-        MS.erase(LS.front());
-        LS.pop_front();
         cin>>a;
         LS.push_back(MS.insert(a));
+        if(a < *it) --it;
+        if(*LS.front() <= *it) ++it;
+        MS.erase(LS.front());
+        LS.pop_front();
     }
 }
 
 /*
-16 3 2 
+16 5 3 
 2 4 3 5 8 1 2 1 2 4 3 5 8 1 2 1
+
+8 3 2 
+2 4 3 5 8 1 2 1
+
+10 3 2
+5 5 5 5 5 5 5 5 5 5
 
 */
