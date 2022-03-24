@@ -1,6 +1,6 @@
 #include<iostream>
 #include<set>
-#include<list>
+#include<queue>
 
 using namespace std;
 
@@ -11,22 +11,22 @@ int main(){
     cin>>N>>M>>K;
 
     multiset<int> MS;
-    list<multiset<int>::iterator> LS;
+    queue<multiset<int>::iterator> LS;
     for(int i = 0; i < M; ++i){
         cin>>a;
-        LS.push_back(MS.insert(a));
+        LS.push(MS.insert(a));
     }
     auto it = MS.begin();
     advance(it, K-1);
-    for(int i = 0; i < N-M+1; ++i){
-        cout<<*it<<' ';
-        if(i == N-M) break;
+    cout<<*it<<' ';
+    for(int i = 0; i < N-M; ++i){
         cin>>a;
-        LS.push_back(MS.insert(a));
+        LS.push(MS.insert(a));
         if(a < *it) --it;
         if(*LS.front() <= *it) ++it;
         MS.erase(LS.front());
-        LS.pop_front();
+        LS.pop();
+        cout<<*it<<' ';
     }
 }
 
@@ -38,6 +38,6 @@ int main(){
 2 4 3 5 8 1 2 1
 
 10 3 2
-5 5 5 5 5 5 5 5 5 5
+5 5 5 4 3 2 8 9 1 0
 
 */
