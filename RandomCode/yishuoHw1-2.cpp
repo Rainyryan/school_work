@@ -1,11 +1,16 @@
 #include<iostream>
 #include<string>
+#include<vector>
 
 using namespace std;
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+
+    vector<int> happy;
+
+    
 
     string s;
     while(1){
@@ -18,8 +23,6 @@ int main(){
             else if(S>0) --S;
             else ++c;
         }
-        cout<<"output\n";
-        S ? cout<<S : cout<<c;
-        cout<<'\n';
+        cout<<"output\n"<<S+c<<'\n';
     }
 }
