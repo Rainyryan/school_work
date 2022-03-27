@@ -14,8 +14,6 @@ int main(){
     int N, M;
     cin>>N>>M;
 
-    Map.reserve(N+1);
-
     string C;
     int a, b;
 
@@ -24,17 +22,16 @@ int main(){
         if(C[0]=='s'){
             cin>>b;
             if(Map.count(a)) Dq.erase(Map[a].second);
-            Map[a].first = b;
             Dq.push_back(a);
-            Map[a].second = prev(Dq.end());
+            Map[a] = make_pair(b, --Dq.end());
         }else{
             if(Map.count(a)){
-                cout<<Map[a].first<<endl;
+                cout<<Map[a].first<<'\n';
                 Dq.erase(Map[a].second);
                 Dq.push_back(a);
-                Map[a].second = prev(Dq.end());
+                Map[a].second = --Dq.end();
             }else 
-                cout<<"-1"<<endl;
+                cout<<"-1\n";
         }
         if(Map.size() > N){
             Map.erase(Dq.front());
