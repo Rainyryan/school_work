@@ -42,7 +42,7 @@ module CS(Y, X, reset, clk);
       if(Xn[j] <= A && Xn[j] > Ap)
         Ap = Xn[j];
         
-    Y = (S + 9*Ap)/8;
+    #1 Y = (S + 9*Ap)/8;
   end
 
 endmodule
