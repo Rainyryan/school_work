@@ -14,8 +14,8 @@ int main(){
         cin>>N>>W;
         for(int j = 0; j < N; ++j){
             cin>>S>>P;
-            if(S == 'b' && P - pp > m){
-                m = P;
+            if(S == 'b'){
+                m = max(m, P - pp);
                 pp = P;
             }
         }
@@ -27,13 +27,15 @@ int main(){
 }
 
 /*
-4 
+3 
 1 10 
 b 5 
 1 10 
 s 5 
 2 10 
 b 3 s 6
+
+1 
 3 20 
 s 5 b 10 s 16
 

@@ -18,13 +18,13 @@ int main() {
         lit = &C[a];
         rit = &C[a];
         while (1) {
-            if (lit > &C[0] && *lit >= b) {
+            if (lit > &C[0] && *lit >= b){
                 cout << lit - &C[0] << '\n';
                 break;
-            } else if (rit < &C[10000000] && *rit >= b) {
+            }else if(rit < &C[10000000] && *rit >= b){
                 cout << rit - &C[0] << '\n';
                 break;
-            } else if (lit <= &C[0] && rit >= &C[10000000]) {
+            }else if(lit <= &C[0] && rit >= &C[10000000]){
                 cout << "-1\n";
                 break;
             }
