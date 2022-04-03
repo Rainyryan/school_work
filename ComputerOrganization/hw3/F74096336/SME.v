@@ -22,6 +22,8 @@ reg [4:0] cnt_p; // pattern counter
 reg done; //process done flag
 reg star_flag;
 
+reg [5:0] cnt_s_reg;
+
 parameter I = 3'd0;
 parameter RS = 3'd1; //receive string
 parameter RP = 3'd2; //receive pattern
@@ -106,6 +108,8 @@ always@(posedge clk or posedge reset) begin
         star_flag <= 1'd0;
         valid <= 1'd0;
         for(i=0;i<32;i=i+1) string_reg[i] <= 8'd0;
+        for(i=0;i<8;i=i+1) pattern_reg[i] <= 8'd0;
+        cnt_s_reg <= 6'd0;
     end
     else begin
         cs <= ns;
@@ -116,6 +120,8 @@ always@(posedge clk or posedge reset) begin
         else valid <= 1'd0;
         if(cs == D && ns == RS) string_reg[5'd0] <= chardata;
         else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
+        if(isstring == 1'd1) cnt_s_reg <= cnt_s;
+        if(ispattern == 1'd1) pattern_reg[cnt_p] <= chardata;
 
         if(cs == D) begin
             index_s <= 6'd0;
@@ -195,20 +201,6 @@ always@(posedge clk or posedge reset) begin
     end
 end
 
-/*
-//string_reg
-integer  i;
-always@(posedge clk or posedge reset) begin
-    if(reset) begin
-        for(i=0;i<32;i=i+1) begin
-            string_reg[i] <= 8'd0;
-        end
-    end
-    else if(cs == D && ns == RS) string_reg[5'd0] <= chardata;
-    else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
-end
-*/
-
 //string counter
 reg [5:0] cnt_s_reg;
 always@(*) begin
@@ -218,12 +210,14 @@ always@(*) begin
     else cnt_s = cnt_s_reg;
 end
 
+/*
 always@(posedge clk or posedge reset) begin
     if(reset) cnt_s_reg <= 6'd0;
     //else if(cs == D && ns == RS) cnt_s_reg <= 6'd0;
     else if(isstring == 1'd1) cnt_s_reg <= cnt_s;
 end
-
+*/
+/*
 //pattern_reg
 always@(posedge clk or posedge reset) begin
     if(reset) begin
@@ -233,7 +227,7 @@ always@(posedge clk or posedge reset) begin
     end
     else if(ispattern == 1'd1) pattern_reg[cnt_p] <= chardata;
 end
-
+*/
 //pattern counter
 always@(posedge clk or posedge reset) begin
     if(reset) cnt_p <= 5'd0;
