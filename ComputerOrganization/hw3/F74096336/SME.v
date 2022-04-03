@@ -33,19 +33,6 @@ parameter CHECK = 3'd1;
 parameter CHECK_MATCH = 3'd2;
 parameter P_DONE_MATCH = 3'd3;
 parameter P_DONE_UNMATCH = 3'd4; //unmatch
-//state switch
-/*
-always@(posedge clk or posedge reset) begin
-    if(reset) begin
-        cs <= IDLE;
-        cs_p <= P_IDLE;
-    end
-    else begin
-        cs <= ns;
-        cs_p <= ns_p;
-    end
-end
-*/
 
 //next state logic
 always@(*) begin
@@ -116,12 +103,14 @@ always@(posedge clk or posedge reset) begin
         cnt_m <= 5'd0;
         cnt_m_temp <= 5'd0;
         match_index <= 5'd0;
+        match <= 1'd0;
         done <= 1'd0;
         star_flag <= 1'd0;
     end
     else begin
         cs <= ns;
         cs_p <= ns_p;
+
         if(cs == DONE) begin
             index_s <= 6'd0;
             index_p <= 5'd0;
@@ -191,6 +180,7 @@ always@(posedge clk or posedge reset) begin
                 end
             end
             else if(cs_p == P_DONE_MATCH || cs_p == P_DONE_UNMATCH) begin 
+                match <= ns_p == P_DONE_MATCH ? 1'd1 : 1'd0;
                 done <= 1'd1;
             end 
         end
@@ -201,11 +191,13 @@ always@(posedge clk or posedge reset) begin
 end
 
 //match
+/*
 always@(posedge clk or posedge reset) begin
     if(reset) match <= 1'd0;
     else if(ns_p == P_DONE_MATCH) match <= 1'd1;
     else if(ns_p == P_DONE_UNMATCH) match <= 1'd0;
 end
+*/
 
 //valid
 always@(posedge clk or posedge reset) begin
