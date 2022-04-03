@@ -34,6 +34,7 @@ parameter CHECK_MATCH = 3'd2;
 parameter P_DONE_MATCH = 3'd3;
 parameter P_DONE_UNMATCH = 3'd4; //unmatch
 //state switch
+/*
 always@(posedge clk or posedge reset) begin
     if(reset) begin
         cs <= IDLE;
@@ -44,6 +45,7 @@ always@(posedge clk or posedge reset) begin
         cs_p <= ns_p;
     end
 end
+*/
 
 //next state logic
 always@(*) begin
