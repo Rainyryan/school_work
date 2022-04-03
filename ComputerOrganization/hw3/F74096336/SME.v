@@ -12,21 +12,21 @@ reg match,valid;
 reg [4:0] match_index;
 reg [5:0] index_s;
 reg [4:0] index_p,index_p_temp;
-reg [4:0] cnt_m,cnt_m_temp; //match counter
+reg [4:0] cnt_m,cnt_m_temp;
 
 reg [2:0] cs,ns,cs_p,ns_p;
 reg [7:0] string_reg [0:31];
-reg [5:0] cnt_s; //string counter
+reg [5:0] cnt_s;
 reg [7:0] pattern_reg [0:7];
-reg [4:0] cnt_p; // pattern counter
-reg done; //process done flag
+reg [4:0] cnt_p;
+reg done;
 reg star_flag;
 
 reg [5:0] cnt_s_reg;
 
 parameter I = 3'd0;
-parameter RS = 3'd1; //receive string
-parameter RP = 3'd2; //receive pattern
+parameter RS = 3'd1;
+parameter RP = 3'd2;
 parameter M = 3'd3;
 parameter D = 3'd4;
 
@@ -34,9 +34,15 @@ parameter P_I = 3'd0;
 parameter CHECK = 3'd1;
 parameter CHECK_MATCH = 3'd2;
 parameter P_D_MATCH = 3'd3;
-parameter P_D_UNMATCH = 3'd4; //unmatch
+parameter P_D_UNMATCH = 3'd4;
 
-//next state logic
+always@(*) begin
+    if(cs == D && ns == RS) cnt_s = 6'd0;
+    else if(cs  == I && ns == RS) cnt_s = 6'd0;
+    else if(isstring == 1'd1) cnt_s = cnt_s_reg + 6'd1;
+    else cnt_s = cnt_s_reg;
+end
+
 always@(*) begin
     case(cs)
     I: begin
@@ -91,7 +97,6 @@ always@(*) begin
     endcase 
 end
 
-//output logic
 integer  i, j;
 always@(posedge clk or posedge reset) begin
     if(reset) begin
@@ -144,7 +149,7 @@ always@(posedge clk or posedge reset) begin
                     cnt_m <= cnt_m + 5'd1; 
                     if(index_p == 5'd0) match_index <= index_s;
                 end
-                else if(pattern_reg[index_p] == 8'h5e) //special pattern ^
+                else if(pattern_reg[index_p] == 8'h5e) // ^
                 begin
                     if(index_s == 6'd0 && (string_reg[index_s] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
                         index_p <= index_p + 5'd1;
@@ -173,7 +178,7 @@ always@(posedge clk or posedge reset) begin
                     cnt_m <= cnt_m + 5'd1; 
                     if(index_p == 5'd0) match_index <= index_s;
                 end
-                else if(pattern_reg[index_p] == 8'h2A) begin //special pattern *
+                else if(pattern_reg[index_p] == 8'h2A) begin // *
                     star_flag <= 1'd1;
                     index_p <= index_p + 5'd1;
                     index_p_temp <= index_p + 5'd1;
@@ -204,20 +209,4 @@ always@(posedge clk or posedge reset) begin
     end
 end
 
-//string counter
-// reg [5:0] cnt_s_reg;
-always@(*) begin
-    if(cs == D && ns == RS) cnt_s = 6'd0;
-    else if(cs  == I && ns == RS) cnt_s = 6'd0;
-    else if(isstring == 1'd1) cnt_s = cnt_s_reg + 6'd1;
-    else cnt_s = cnt_s_reg;
-end
-/*
-//pattern counter
-always@(posedge clk or posedge reset) begin
-    if(reset) cnt_p <= 5'd0;
-    else if(ispattern == 1'd1) cnt_p <= cnt_p + 5'd1;
-    else if(ns == D) cnt_p <= 5'd0;
-end
-*/
 endmodule
