@@ -22,6 +22,8 @@ reg [4:0] cnt_p; // pattern counter
 reg done; //process done flag
 reg star_flag;
 
+reg [5:0] cnt_s_reg;
+
 parameter I = 3'd0;
 parameter RS = 3'd1; //receive string
 parameter RP = 3'd2; //receive pattern
@@ -200,7 +202,7 @@ always@(posedge clk or posedge reset) begin
 end
 
 //string counter
-reg [5:0] cnt_s_reg;
+// reg [5:0] cnt_s_reg;
 always@(*) begin
     if(cs == D && ns == RS) cnt_s = 6'd0;
     else if(cs  == I && ns == RS) cnt_s = 6'd0;
