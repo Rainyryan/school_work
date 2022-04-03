@@ -15,9 +15,9 @@ reg [4:0] index_p,index_p_temp;
 reg [4:0] cnt_m,cnt_m_temp;
 
 reg [2:0] cs,ns,cs_p,ns_p;
-reg [7:0] string_reg [0:31];
+reg [7:0] str [0:31];
 reg [5:0] cnt_s;
-reg [7:0] pattern_reg [0:7];
+reg [7:0] pat [0:7];
 reg [4:0] cnt_p;
 reg done;
 reg star_flag;
@@ -69,7 +69,7 @@ always@(*) begin
             else ns_p = CHECK;
         end 
         CHECK_MATCH: begin
-            if(pattern_reg[cnt_p-5'd1] == 8'h24) begin
+            if(pat[cnt_p-5'd1] == 8'h24) begin
                 if(cnt_m+5'd1 == cnt_p) ns_p = P_D_MATCH;
                 else ns_p = P_D_UNMATCH;
             end
@@ -112,8 +112,8 @@ always@(posedge clk or posedge reset) begin
         done <= 1'd0;
         star_flag <= 1'd0;
         valid <= 1'd0;
-        for(i=0;i<32;i=i+1) string_reg[i] <= 8'd0;
-        for(j=0;j<8;j=j+1) pattern_reg[j] <= 8'd0;
+        for(i=0;i<32;i=i+1) str[i] <= 8'd0;
+        for(j=0;j<8;j=j+1) pat[j] <= 8'd0;
         cnt_s_reg <= 6'd0;
         cnt_p <= 5'd0;
     end
@@ -124,10 +124,10 @@ always@(posedge clk or posedge reset) begin
         else if(ns_p == P_D_UNMATCH) match <= 1'd0;
         if(ns == D) valid <= 1'd1;
         else valid <= 1'd0;
-        if(cs == D && ns == RS) string_reg[5'd0] <= chardata;
-        else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
+        if(cs == D && ns == RS) str[5'd0] <= chardata;
+        else if(isstring == 1'd1) str[cnt_s] <= chardata;
         if(isstring == 1'd1) cnt_s_reg <= cnt_s;
-        if(ispattern == 1'd1) pattern_reg[cnt_p] <= chardata;
+        if(ispattern == 1'd1) pat[cnt_p] <= chardata;
         if(ispattern == 1'd1) cnt_p <= cnt_p + 5'd1;
         else if(ns == D) cnt_p <= 5'd0;
 
@@ -143,26 +143,26 @@ always@(posedge clk or posedge reset) begin
         end
         else if(cs == M) begin
             if(cs_p == CHECK) begin
-                if(string_reg[index_s] == pattern_reg[index_p] || pattern_reg[index_p] == 8'h2e) begin
+                if(str[index_s] == pat[index_p] || pat[index_p] == 8'h2e) begin
                     index_p <= index_p + 5'd1;
                     index_s <= index_s + 6'd1;
                     cnt_m <= cnt_m + 5'd1; 
                     if(index_p == 5'd0) match_index <= index_s;
                 end
-                else if(pattern_reg[index_p] == 8'h5e) // ^
+                else if(pat[index_p] == 8'h5e) // ^
                 begin
-                    if(index_s == 6'd0 && (string_reg[index_s] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
+                    if(index_s == 6'd0 && (str[index_s] == pat[index_p+5'd1] || pat[index_p+5'd1] == 8'h2e) ) begin
                         index_p <= index_p + 5'd1;
                         index_s <= index_s + 6'd1;
                         cnt_m <= cnt_m + 5'd1; 
-                        if(string_reg[index_s] == 8'h20) match_index <= index_s + 6'd1;
+                        if(str[index_s] == 8'h20) match_index <= index_s + 6'd1;
                         else match_index <= index_s;
                     end
-                    else if(string_reg[index_s] == 8'h20 && (string_reg[index_s+5'd1] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
+                    else if(str[index_s] == 8'h20 && (str[index_s+5'd1] == pat[index_p+5'd1] || pat[index_p+5'd1] == 8'h2e) ) begin
                         index_p <= index_p + 5'd1;
                         index_s <= index_s + 6'd1;
                         cnt_m <= cnt_m + 5'd1; 
-                        if(string_reg[index_s] == 8'h20) match_index <= index_s + 6'd1;
+                        if(str[index_s] == 8'h20) match_index <= index_s + 6'd1;
                         else match_index <= index_s;
                     end
                     else begin
@@ -172,13 +172,13 @@ always@(posedge clk or posedge reset) begin
                         else index_s <= index_s + 6'd1;
                     end
                 end
-                else if(pattern_reg[index_p] == 8'h24 && (index_s == cnt_s || string_reg[index_s] == 8'h20)) begin //special pattern $
+                else if(pat[index_p] == 8'h24 && (index_s == cnt_s || str[index_s] == 8'h20)) begin //special pattern $
                     index_p <= index_p + 5'd1;
                     index_s <= index_s + 6'd1;
                     cnt_m <= cnt_m + 5'd1; 
                     if(index_p == 5'd0) match_index <= index_s;
                 end
-                else if(pattern_reg[index_p] == 8'h2A) begin // *
+                else if(pat[index_p] == 8'h2A) begin // *
                     star_flag <= 1'd1;
                     index_p <= index_p + 5'd1;
                     index_p_temp <= index_p + 5'd1;
@@ -187,12 +187,12 @@ always@(posedge clk or posedge reset) begin
                     cnt_m_temp <= cnt_m + 5'd1;
                     if(index_p == 5'd0) match_index <= index_s;
                 end
-                else if(star_flag == 1'd1 && string_reg[index_s] != pattern_reg[index_p] && pattern_reg[index_p] != 8'h2e) begin
+                else if(star_flag == 1'd1 && str[index_s] != pat[index_p] && pat[index_p] != 8'h2e) begin
                     index_p <= index_p_temp;
                     cnt_m <= cnt_m_temp;
                     index_s <= index_s + 6'd1;
                 end
-                else if(string_reg[index_s] != pattern_reg[index_p] && pattern_reg[index_p] != 8'h2e) begin
+                else if(str[index_s] != pat[index_p] && pat[index_p] != 8'h2e) begin
                     index_p <= index_p_temp;
                     cnt_m <= 5'd0;
                     if(index_p != 5'd0) index_s <= match_index + 6'd1;
