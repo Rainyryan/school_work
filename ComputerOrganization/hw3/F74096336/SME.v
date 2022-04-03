@@ -22,8 +22,6 @@ reg [4:0] cnt_p; // pattern counter
 reg done; //process done flag
 reg star_flag;
 
-reg [5:0] cnt_s_reg;
-
 parameter I = 3'd0;
 parameter RS = 3'd1; //receive string
 parameter RP = 3'd2; //receive pattern
