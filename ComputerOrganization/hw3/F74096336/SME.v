@@ -180,7 +180,6 @@ always@(posedge clk or posedge reset) begin
                 end
             end
             else if(cs_p == P_DONE_MATCH || cs_p == P_DONE_UNMATCH) begin 
-                match <= ns_p == P_DONE_MATCH ? 1'd1 : 1'd0;
                 done <= 1'd1;
             end 
         end
@@ -191,13 +190,11 @@ always@(posedge clk or posedge reset) begin
 end
 
 //match
-/*
 always@(posedge clk or posedge reset) begin
     if(reset) match <= 1'd0;
     else if(ns_p == P_DONE_MATCH) match <= 1'd1;
     else if(ns_p == P_DONE_UNMATCH) match <= 1'd0;
 end
-*/
 
 //valid
 always@(posedge clk or posedge reset) begin
