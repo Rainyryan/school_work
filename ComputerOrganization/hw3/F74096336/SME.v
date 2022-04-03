@@ -110,6 +110,7 @@ always@(posedge clk or posedge reset) begin
         for(i=0;i<32;i=i+1) string_reg[i] <= 8'd0;
         for(j=0;j<8;j=j+1) pattern_reg[j] <= 8'd0;
         cnt_s_reg <= 6'd0;
+        cnt_p <= 5'd0;
     end
     else begin
         cs <= ns;
@@ -122,6 +123,8 @@ always@(posedge clk or posedge reset) begin
         else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
         if(isstring == 1'd1) cnt_s_reg <= cnt_s;
         if(ispattern == 1'd1) pattern_reg[cnt_p] <= chardata;
+        if(ispattern == 1'd1) cnt_p <= cnt_p + 5'd1;
+        else if(ns == D) cnt_p <= 5'd0;
 
         if(cs == D) begin
             index_s <= 6'd0;
@@ -209,30 +212,12 @@ always@(*) begin
     else if(isstring == 1'd1) cnt_s = cnt_s_reg + 6'd1;
     else cnt_s = cnt_s_reg;
 end
-
 /*
-always@(posedge clk or posedge reset) begin
-    if(reset) cnt_s_reg <= 6'd0;
-    //else if(cs == D && ns == RS) cnt_s_reg <= 6'd0;
-    else if(isstring == 1'd1) cnt_s_reg <= cnt_s;
-end
-*/
-/*
-//pattern_reg
-always@(posedge clk or posedge reset) begin
-    if(reset) begin
-        for(i=0;i<8;i=i+1) begin
-            pattern_reg[i] <= 8'd0;
-        end       
-    end
-    else if(ispattern == 1'd1) pattern_reg[cnt_p] <= chardata;
-end
-*/
 //pattern counter
 always@(posedge clk or posedge reset) begin
     if(reset) cnt_p <= 5'd0;
     else if(ispattern == 1'd1) cnt_p <= cnt_p + 5'd1;
     else if(ns == D) cnt_p <= 5'd0;
 end
-
+*/
 endmodule
