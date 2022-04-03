@@ -90,6 +90,7 @@ always@(*) begin
 end
 
 //output logic
+integer  i;
 always@(posedge clk or posedge reset) begin
     if(reset) begin
         cs <= I;
@@ -104,6 +105,7 @@ always@(posedge clk or posedge reset) begin
         done <= 1'd0;
         star_flag <= 1'd0;
         valid <= 1'd0;
+        for(i=0;i<32;i=i+1) string_reg[i] <= 8'd0;
     end
     else begin
         cs <= ns;
@@ -112,6 +114,8 @@ always@(posedge clk or posedge reset) begin
         else if(ns_p == P_D_UNMATCH) match <= 1'd0;
         if(ns == D) valid <= 1'd1;
         else valid <= 1'd0;
+        if(cs == D && ns == RS) string_reg[5'd0] <= chardata;
+        else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
 
         if(cs == D) begin
             index_s <= 6'd0;
@@ -190,14 +194,8 @@ always@(posedge clk or posedge reset) begin
         end
     end
 end
+
 /*
-//valid
-always@(posedge clk or posedge reset) begin
-    if(reset) valid <= 1'd0;
-    else if(ns == D) valid <= 1'd1;
-    else valid <= 1'd0;
-end
-*/
 //string_reg
 integer  i;
 always@(posedge clk or posedge reset) begin
@@ -209,6 +207,7 @@ always@(posedge clk or posedge reset) begin
     else if(cs == D && ns == RS) string_reg[5'd0] <= chardata;
     else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
 end
+*/
 
 //string counter
 reg [5:0] cnt_s_reg;
