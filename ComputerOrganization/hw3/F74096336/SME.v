@@ -22,11 +22,6 @@ reg [4:0] cnt_p; // pattern counter
 reg done; //process done flag
 reg star_flag;
 
-//debug 
-wire [7:0] s_debug = string_reg[index_s];
-wire [7:0] p_debug = pattern_reg[index_p];
-wire [7:0] p_debug_head = pattern_reg[index_p+5'd1];
-
 parameter IDLE = 3'd0;
 parameter RECV_S = 3'd1; //receive string
 parameter RECV_P = 3'd2; //receive pattern
@@ -111,6 +106,8 @@ end
 //output logic
 always@(posedge clk or posedge reset) begin
     if(reset) begin
+        cs <= IDLE;
+        cs_p <= P_IDLE;
         index_s <= 6'd0;
         index_p <= 5'd0;
         index_p_temp <= 5'd0;
@@ -119,81 +116,86 @@ always@(posedge clk or posedge reset) begin
         match_index <= 5'd0;
         done <= 1'd0;
         star_flag <= 1'd0;
-    end
-    else if(cs == DONE) begin
-        index_s <= 6'd0;
-        index_p <= 5'd0;
-        index_p_temp <= 5'd0;
-        cnt_m <= 5'd0;
-        cnt_m_temp <= 5'd0;
-        match_index <= 5'd0;
-        done <= 1'd0;
-        star_flag <= 1'd0;
-    end
-    else if(cs == PROCESS) begin
-        if(cs_p == CHECK) begin
-            if(string_reg[index_s] == pattern_reg[index_p] || pattern_reg[index_p] == 8'h2e) begin
-                index_p <= index_p + 5'd1;
-                index_s <= index_s + 6'd1;
-                cnt_m <= cnt_m + 5'd1; 
-                if(index_p == 5'd0) match_index <= index_s;
-            end
-            else if(pattern_reg[index_p] == 8'h5e) //special pattern ^
-            begin
-                if(index_s == 6'd0 && (string_reg[index_s] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
-                    index_p <= index_p + 5'd1;
-                    index_s <= index_s + 6'd1;
-                    cnt_m <= cnt_m + 5'd1; 
-                    if(string_reg[index_s] == 8'h20) match_index <= index_s + 6'd1;
-                    else match_index <= index_s;
-                end
-                else if(string_reg[index_s] == 8'h20 && (string_reg[index_s+5'd1] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
-                    index_p <= index_p + 5'd1;
-                    index_s <= index_s + 6'd1;
-                    cnt_m <= cnt_m + 5'd1; 
-                    if(string_reg[index_s] == 8'h20) match_index <= index_s + 6'd1;
-                    else match_index <= index_s;
-                end
-                else begin
-                    index_p <= index_p_temp;
-                    cnt_m <= 5'd0;
-                    if(index_p != 5'd0) index_s <= match_index + 6'd1;
-                    else index_s <= index_s + 6'd1;
-                end
-            end
-            else if(pattern_reg[index_p] == 8'h24 && (index_s == cnt_s || string_reg[index_s] == 8'h20)) begin //special pattern $
-                index_p <= index_p + 5'd1;
-                index_s <= index_s + 6'd1;
-                cnt_m <= cnt_m + 5'd1; 
-                if(index_p == 5'd0) match_index <= index_s;
-            end
-            else if(pattern_reg[index_p] == 8'h2A) begin //special pattern *
-                star_flag <= 1'd1;
-                index_p <= index_p + 5'd1;
-                index_p_temp <= index_p + 5'd1;
-                index_s <= index_s;
-                cnt_m <= cnt_m + 5'd1;
-                cnt_m_temp <= cnt_m + 5'd1;
-                if(index_p == 5'd0) match_index <= index_s;
-            end
-            else if(star_flag == 1'd1 && string_reg[index_s] != pattern_reg[index_p] && pattern_reg[index_p] != 8'h2e) begin
-                index_p <= index_p_temp;
-                cnt_m <= cnt_m_temp;
-                index_s <= index_s + 6'd1;
-            end
-            else if(string_reg[index_s] != pattern_reg[index_p] && pattern_reg[index_p] != 8'h2e) begin
-                index_p <= index_p_temp;
-                cnt_m <= 5'd0;
-                if(index_p != 5'd0) index_s <= match_index + 6'd1;
-                else index_s <= index_s + 6'd1;
-            end
-        end
-        else if(cs_p == P_DONE_MATCH || cs_p == P_DONE_UNMATCH) begin 
-            done <= 1'd1;
-        end 
     end
     else begin
-        done <= 1'd0;
+        cs <= ns;
+        cs_p <= ns_p;
+        if(cs == DONE) begin
+            index_s <= 6'd0;
+            index_p <= 5'd0;
+            index_p_temp <= 5'd0;
+            cnt_m <= 5'd0;
+            cnt_m_temp <= 5'd0;
+            match_index <= 5'd0;
+            done <= 1'd0;
+            star_flag <= 1'd0;
+        end
+        else if(cs == PROCESS) begin
+                if(cs_p == CHECK) begin
+                    if(string_reg[index_s] == pattern_reg[index_p] || pattern_reg[index_p] == 8'h2e) begin
+                        index_p <= index_p + 5'd1;
+                        index_s <= index_s + 6'd1;
+                        cnt_m <= cnt_m + 5'd1; 
+                        if(index_p == 5'd0) match_index <= index_s;
+                    end
+                    else if(pattern_reg[index_p] == 8'h5e) //special pattern ^
+                    begin
+                        if(index_s == 6'd0 && (string_reg[index_s] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
+                            index_p <= index_p + 5'd1;
+                            index_s <= index_s + 6'd1;
+                            cnt_m <= cnt_m + 5'd1; 
+                            if(string_reg[index_s] == 8'h20) match_index <= index_s + 6'd1;
+                            else match_index <= index_s;
+                        end
+                        else if(string_reg[index_s] == 8'h20 && (string_reg[index_s+5'd1] == pattern_reg[index_p+5'd1] || pattern_reg[index_p+5'd1] == 8'h2e) ) begin
+                            index_p <= index_p + 5'd1;
+                            index_s <= index_s + 6'd1;
+                            cnt_m <= cnt_m + 5'd1; 
+                            if(string_reg[index_s] == 8'h20) match_index <= index_s + 6'd1;
+                            else match_index <= index_s;
+                        end
+                        else begin
+                            index_p <= index_p_temp;
+                            cnt_m <= 5'd0;
+                            if(index_p != 5'd0) index_s <= match_index + 6'd1;
+                            else index_s <= index_s + 6'd1;
+                        end
+                    end
+                    else if(pattern_reg[index_p] == 8'h24 && (index_s == cnt_s || string_reg[index_s] == 8'h20)) begin //special pattern $
+                        index_p <= index_p + 5'd1;
+                        index_s <= index_s + 6'd1;
+                        cnt_m <= cnt_m + 5'd1; 
+                        if(index_p == 5'd0) match_index <= index_s;
+                    end
+                    else if(pattern_reg[index_p] == 8'h2A) begin //special pattern *
+                        star_flag <= 1'd1;
+                        index_p <= index_p + 5'd1;
+                        index_p_temp <= index_p + 5'd1;
+                        index_s <= index_s;
+                        cnt_m <= cnt_m + 5'd1;
+                        cnt_m_temp <= cnt_m + 5'd1;
+                        if(index_p == 5'd0) match_index <= index_s;
+                    end
+                    else if(star_flag == 1'd1 && string_reg[index_s] != pattern_reg[index_p] && pattern_reg[index_p] != 8'h2e) begin
+                        index_p <= index_p_temp;
+                        cnt_m <= cnt_m_temp;
+                        index_s <= index_s + 6'd1;
+                    end
+                    else if(string_reg[index_s] != pattern_reg[index_p] && pattern_reg[index_p] != 8'h2e) begin
+                        index_p <= index_p_temp;
+                        cnt_m <= 5'd0;
+                        if(index_p != 5'd0) index_s <= match_index + 6'd1;
+                        else index_s <= index_s + 6'd1;
+                    end
+                end
+            end
+            else if(cs_p == P_DONE_MATCH || cs_p == P_DONE_UNMATCH) begin 
+                done <= 1'd1;
+            end 
+        end
+        else begin
+            done <= 1'd0;
+        end
     end
 end
 
