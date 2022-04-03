@@ -109,8 +109,9 @@ always@(posedge clk or posedge reset) begin
     end
     else begin
         cs <= ns;
-        cs_p <= ns_p;
-        match <= ns_p == P_DONE_MATCH ? 1'd1 : 1'd0;
+        cs_p <= ns_p;       
+        if(ns_p == P_DONE_MATCH) match <= 1'd1;
+        else if(ns_p == P_DONE_UNMATCH) match <= 1'd0;
 
         if(cs == DONE) begin
             index_s <= 6'd0;
