@@ -89,37 +89,6 @@ always@(*) begin
     endcase 
 end
 
-/*
-always@(*) begin
-    if(cs == M) begin
-        case(cs_p)
-        P_I: begin
-            ns_p = CHECK;
-        end 
-        CHECK: begin
-            if(cnt_m == cnt_p) ns_p = P_D_MATCH;
-            else if(cnt_s == index_s || cnt_p == index_p) ns_p = CHECK_MATCH;
-            else ns_p = CHECK;
-        end 
-        CHECK_MATCH: begin
-            if(pattern_reg[cnt_p-5'd1] == 8'h24) begin
-                if(cnt_m+5'd1 == cnt_p) ns_p = P_D_MATCH;
-                else ns_p = P_D_UNMATCH;
-            end
-            else begin
-                if(cnt_m == cnt_p) ns_p = P_D_MATCH;
-                else ns_p = P_D_UNMATCH;
-            end
-        end
-        P_D_MATCH: ns_p = P_I;
-        P_D_UNMATCH: ns_p = P_I;
-        default: ns_p = P_I;
-        endcase 
-    end
-    else ns_p = P_I;
-end
-*/
-
 //output logic
 always@(posedge clk or posedge reset) begin
     if(reset) begin
@@ -134,12 +103,15 @@ always@(posedge clk or posedge reset) begin
         match <= 1'd0;
         done <= 1'd0;
         star_flag <= 1'd0;
+        valid <= 1'd0;
     end
     else begin
         cs <= ns;
         cs_p <= ns_p;       
         if(ns_p == P_D_MATCH) match <= 1'd1;
         else if(ns_p == P_D_UNMATCH) match <= 1'd0;
+        if(ns == D) valid <= 1'd1;
+        else valid <= 1'd0;
 
         if(cs == D) begin
             index_s <= 6'd0;
@@ -218,23 +190,14 @@ always@(posedge clk or posedge reset) begin
         end
     end
 end
-
-//match
 /*
-always@(posedge clk or posedge reset) begin
-    if(reset) match <= 1'd0;
-    else if(ns_p == P_D_MATCH) match <= 1'd1;
-    else if(ns_p == P_D_UNMATCH) match <= 1'd0;
-end
-*/
-
 //valid
 always@(posedge clk or posedge reset) begin
     if(reset) valid <= 1'd0;
     else if(ns == D) valid <= 1'd1;
     else valid <= 1'd0;
 end
-
+*/
 //string_reg
 integer  i;
 always@(posedge clk or posedge reset) begin
