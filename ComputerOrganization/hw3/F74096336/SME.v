@@ -51,6 +51,29 @@ always@(*) begin
         else ns = M;
     end
     M: begin
+        case(cs_p)
+        P_I: begin
+            ns_p = CHECK;
+        end 
+        CHECK: begin
+            if(cnt_m == cnt_p) ns_p = P_D_MATCH;
+            else if(cnt_s == index_s || cnt_p == index_p) ns_p = CHECK_MATCH;
+            else ns_p = CHECK;
+        end 
+        CHECK_MATCH: begin
+            if(pattern_reg[cnt_p-5'd1] == 8'h24) begin
+                if(cnt_m+5'd1 == cnt_p) ns_p = P_D_MATCH;
+                else ns_p = P_D_UNMATCH;
+            end
+            else begin
+                if(cnt_m == cnt_p) ns_p = P_D_MATCH;
+                else ns_p = P_D_UNMATCH;
+            end
+        end
+        P_D_MATCH: ns_p = P_I;
+        P_D_UNMATCH: ns_p = P_I;
+        default: ns_p = P_I;
+        endcase 
         if(done == 1'd1) ns = D;
         else ns = M;
     end
@@ -59,10 +82,14 @@ always@(*) begin
         else if(ispattern == 1'd1) ns = RP;
         else ns = I;
     end
-    default: ns = I;
+    default: begin
+        ns = I;
+        ns_p = P_I;
+    end
     endcase 
 end
 
+/*
 always@(*) begin
     if(cs == M) begin
         case(cs_p)
@@ -91,6 +118,7 @@ always@(*) begin
     end
     else ns_p = P_I;
 end
+*/
 
 //output logic
 always@(posedge clk or posedge reset) begin
