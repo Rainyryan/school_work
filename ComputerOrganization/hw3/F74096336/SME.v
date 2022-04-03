@@ -22,13 +22,13 @@ reg [4:0] cnt_p; // pattern counter
 reg done; //process done flag
 reg star_flag;
 
-parameter IDLE = 3'd0;
-parameter RECV_S = 3'd1; //receive string
-parameter RECV_P = 3'd2; //receive pattern
+parameter I = 3'd0;
+parameter RS = 3'd1; //receive string
+parameter RP = 3'd2; //receive pattern
 parameter PROCESS = 3'd3;
 parameter DONE = 3'd4;
 
-parameter P_IDLE = 3'd0;
+parameter P_I = 3'd0;
 parameter CHECK = 3'd1;
 parameter CHECK_MATCH = 3'd2;
 parameter P_DONE_MATCH = 3'd3;
@@ -37,17 +37,17 @@ parameter P_DONE_UNMATCH = 3'd4; //unmatch
 //next state logic
 always@(*) begin
     case(cs)
-    IDLE: begin
-        if(isstring == 1'd1) ns = RECV_S;
-        else if(ispattern == 1'd1) ns = RECV_P;
-        else ns = IDLE;
+    I: begin
+        if(isstring == 1'd1) ns = RS;
+        else if(ispattern == 1'd1) ns = RP;
+        else ns = I;
     end
-    RECV_S: begin
-        if(isstring == 1'd1) ns = RECV_S;
-        else ns = RECV_P;
+    RS: begin
+        if(isstring == 1'd1) ns = RS;
+        else ns = RP;
     end
-    RECV_P: begin
-        if(ispattern == 1'd1) ns = RECV_P;
+    RP: begin
+        if(ispattern == 1'd1) ns = RP;
         else ns = PROCESS;
     end
     PROCESS: begin
@@ -55,18 +55,18 @@ always@(*) begin
         else ns = PROCESS;
     end
     DONE: begin
-        if(isstring == 1'd1) ns = RECV_S;
-        else if(ispattern == 1'd1) ns = RECV_P;
-        else ns = IDLE;
+        if(isstring == 1'd1) ns = RS;
+        else if(ispattern == 1'd1) ns = RP;
+        else ns = I;
     end
-    default: ns = IDLE;
+    default: ns = I;
     endcase 
 end
 
 always@(*) begin
     if(cs == PROCESS) begin
         case(cs_p)
-        P_IDLE: begin
+        P_I: begin
             ns_p = CHECK;
         end 
         CHECK: begin
@@ -84,19 +84,19 @@ always@(*) begin
                 else ns_p = P_DONE_UNMATCH;
             end
         end
-        P_DONE_MATCH: ns_p = P_IDLE;
-        P_DONE_UNMATCH: ns_p = P_IDLE;
-        default: ns_p = P_IDLE;
+        P_DONE_MATCH: ns_p = P_I;
+        P_DONE_UNMATCH: ns_p = P_I;
+        default: ns_p = P_I;
         endcase 
     end
-    else ns_p = P_IDLE;
+    else ns_p = P_I;
 end
 
 //output logic
 always@(posedge clk or posedge reset) begin
     if(reset) begin
-        cs <= IDLE;
-        cs_p <= P_IDLE;
+        cs <= I;
+        cs_p <= P_I;
         index_s <= 6'd0;
         index_p <= 5'd0;
         index_p_temp <= 5'd0;
@@ -215,22 +215,22 @@ always@(posedge clk or posedge reset) begin
             string_reg[i] <= 8'd0;
         end
     end
-    else if(cs == DONE && ns == RECV_S) string_reg[5'd0] <= chardata;
+    else if(cs == DONE && ns == RS) string_reg[5'd0] <= chardata;
     else if(isstring == 1'd1) string_reg[cnt_s] <= chardata;
 end
 
 //string counter
 reg [5:0] cnt_s_reg;
 always@(*) begin
-    if(cs == DONE && ns == RECV_S) cnt_s = 6'd0;
-    else if(cs  == IDLE && ns == RECV_S) cnt_s = 6'd0;
+    if(cs == DONE && ns == RS) cnt_s = 6'd0;
+    else if(cs  == I && ns == RS) cnt_s = 6'd0;
     else if(isstring == 1'd1) cnt_s = cnt_s_reg + 6'd1;
     else cnt_s = cnt_s_reg;
 end
 
 always@(posedge clk or posedge reset) begin
     if(reset) cnt_s_reg <= 6'd0;
-    //else if(cs == DONE && ns == RECV_S) cnt_s_reg <= 6'd0;
+    //else if(cs == DONE && ns == RS) cnt_s_reg <= 6'd0;
     else if(isstring == 1'd1) cnt_s_reg <= cnt_s;
 end
 
