@@ -90,7 +90,7 @@ always@(*) begin
 end
 
 //output logic
-integer  i;
+integer  i, j;
 always@(posedge clk or posedge reset) begin
     if(reset) begin
         cs <= I;
@@ -106,7 +106,7 @@ always@(posedge clk or posedge reset) begin
         star_flag <= 1'd0;
         valid <= 1'd0;
         for(i=0;i<32;i=i+1) string_reg[i] <= 8'd0;
-        for(i=0;i<8;i=i+1) pattern_reg[i] <= 8'd0;
+        for(j=0;j<8;j=j+1) pattern_reg[j] <= 8'd0;
         cnt_s_reg <= 6'd0;
     end
     else begin
