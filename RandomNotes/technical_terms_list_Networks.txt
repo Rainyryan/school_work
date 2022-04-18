@@ -1,0 +1,20 @@
+FDM-frequency division multiplexing
+TDM-time division multiplexing
+
+HFC-hybrid fiber coax
+DSL-digital subscriber line
+DSLAM-digital subscriber line access manager
+NAT-network access translation
+TP-twisted pair ethernet cable
+IXP-internet exchange point
+
+TCP-Transmission control protocol
+UDP-User datagram protocol
+
+HTTP-hypertext transfer protocol
+RTT-round trip time
+
+SMTP-simple mail transfer protocol
+IMAP-internet mail access protocol
+
+
