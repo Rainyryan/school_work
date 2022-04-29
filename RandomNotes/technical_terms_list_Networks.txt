@@ -17,4 +17,13 @@ RTT-round trip time
 SMTP-simple mail transfer protocol
 IMAP-internet mail access protocol
 
+DNS-domain name system
+TLD-top level domain
+
+CBR-constant bit rate
+VBR-variable bit rate
+DASH-dynamic, adaptive streaming over HTTP
+CDN-content distribution network
+
+SNMP-simple network management protocol
 
