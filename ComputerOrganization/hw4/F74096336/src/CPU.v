@@ -61,11 +61,11 @@ always@(posedge clk or posedge rst)begin
 		case(opcode)
 			7'b0010011:begin//I-type
 				/*add your code*/
-				Immediate <= {20'd0, instr_out[11:0]};	
+				Immediate <= {{20{instr_out[11]}}, instr_out[11:0]};	
 			end
 			7'b0100011:begin//S-type
 				/*add your code*/
-				Immediate <= {25'd0, instr_out[11:5]};	
+				Immediate <= {{25{instr_out[11]}}, instr_out[11:5]};	
 			end
 			7'b0110111:begin//LUI
 				Immediate[31:12] <= instr_out[31:12];
