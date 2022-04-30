@@ -173,7 +173,7 @@ always@(posedge clk or posedge rst)begin
 		case(opcode)
 			7'b0100011:begin//S-type
 				/*add your code*/
-				data_addr <= rs1 + Immediate;
+				data_addr <= Register[rs1] + Immediate;
 			end
 		endcase
 	end
