@@ -212,7 +212,7 @@ always@(posedge clk or posedge rst)begin
 					3'b000:begin//JALR
 						/*add your code*/
 						instr_addr <= Immediate + Register[rs1];
-						instr_addr[0] <= 1'b0;
+						//instr_addr[0] <= 1'b0;
 					end
 				endcase
 			end
