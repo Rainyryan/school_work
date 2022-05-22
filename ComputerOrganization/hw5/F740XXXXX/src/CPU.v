@@ -77,11 +77,11 @@ always@(posedge clk or posedge rst)begin
 			end
 			7'b1100011:begin//B-type
 				/*add your code*/
-				Immediate <= {{19{instr_out[31]}}, instr_out[31],instr_out[7],instr_out[30:25], instr_out[11:8],1'b0};
+				Immediate <= {{19{instr_out[31]}}, instr_out[31], instr_out[7], instr_out[30:25], instr_out[11:8], 1'b0};
 			end
 			7'b0010111:begin//AUIPC
 				/*add your code*/
-				Immidiate <= {instr_out[31:12], 12'h0};
+				Immediate <= {instr_out[31:12], 12'h0};
 			end
 			7'b0110111:begin//LUI
 				Immediate[31:12] <= instr_out[31:12];
@@ -89,7 +89,7 @@ always@(posedge clk or posedge rst)begin
 			end
 			7'b1101111:begin//J-type
 				/*add your code*/
-				Immidiate <= {{12{instr_out[31]}}, instr_out[19:12], instr_out[20], instr_out[30:21], 1'b0};
+				Immediate <= {{12{instr_out[31]}}, instr_out[19:12], instr_out[20], instr_out[30:21], 1'b0};
 			end
 		endcase
 	end
@@ -212,7 +212,7 @@ always@(posedge clk or posedge rst)begin
 					3'b000:begin//JALR
 						/*add your code*/
 						instr_addr <= Immediate + Register[rs1];
-						instr_addr[0] = 1'b0;
+						instr_addr[0] <= 1'b0;
 					end
 				endcase
 			end
