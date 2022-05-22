@@ -1,4 +1,11 @@
-C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top.v
+C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/SRAM.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/SRAM.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SRAM
+
+Top level modules:
+	SRAM
+
+} {} {}} C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top.v
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling module CPU
 -- Compiling module SRAM
@@ -7,12 +14,12 @@ Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 Top level modules:
 	top
 
-} {} {}} C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/SRAM.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/SRAM.v
+} {} {}} C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top_tb.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top_tb.v
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
--- Compiling module SRAM
+-- Compiling module top_tb
 
 Top level modules:
-	SRAM
+	top_tb
 
 } {} {}} C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/CPU.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/CPU.v
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
@@ -20,12 +27,5 @@ Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 
 Top level modules:
 	CPU
-
-} {} {}} C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top_tb.v {1 {vlog -work work C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw4/F74096336/src/top_tb.v
-Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
--- Compiling module top_tb
-
-Top level modules:
-	top_tb
 
 } {} {}}
