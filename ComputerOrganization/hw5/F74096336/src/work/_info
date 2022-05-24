@@ -4,10 +4,10 @@ K3
 cModel Technology
 Z0 dC:\Users\rc615\Documents\GitHub\SchoolWork\ComputerOrganization\hw4\F74096336\src
 vCPU
-Z1 I5nUL4LIlZ5PK26P9:dzOb2
+Z1 I`am322]8Hcm]B=EO<PT3_2
 Z2 V?E5IbGG8jJKBmAR5BZCfN3
 Z3 dC:\Users\rc615\Documents\GitHub\SchoolWork\ComputerOrganization\hw5\F74096336\src
-Z4 w1653237616
+Z4 w1653244818
 Z5 FCPU.v
 Z6 8C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw5/F74096336/src/top.v
 Z7 FC:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw5/F74096336/src/top.v
@@ -15,13 +15,13 @@ L0 1
 Z8 OV;L;10.1d;51
 r1
 31
-Z9 !s108 1653237637.264000
+Z9 !s108 1653244826.144000
 Z10 !s107 SRAM.v|CPU.v|C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw5/F74096336/src/top.v|
 Z11 !s90 -reportprogress|300|-work|work|C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw5/F74096336/src/top.v|
 Z12 o-work work -O0
 Z13 n@c@p@u
 !i10b 1
-Z14 !s100 ==>f@WYHif[YOIR>dmXg[2
+Z14 !s100 5hSOd`N22:nGUFMoln:8o0
 !s85 0
 !s101 -O0
 vSRAM
@@ -78,7 +78,7 @@ R8
 r1
 !s85 0
 31
-!s108 1653237637.342000
+!s108 1653244826.220000
 !s107 C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw5/F74096336/src/top_tb.v|
 Z29 !s90 -reportprogress|300|-work|work|C:/Users/rc615/Documents/GitHub/SchoolWork/ComputerOrganization/hw5/F74096336/src/top_tb.v|
 !s101 -O0
