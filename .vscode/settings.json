@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "set": "cpp",
+        "map": "cpp",
+        "__bit_reference": "cpp",
+        "algorithm": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "unordered_map": "cpp"
+    },
+    "cmake.configureOnOpen": false,
+    "C_Cpp.errorSquiggles": "Disabled"
+}
