@@ -4,7 +4,7 @@ def main():
     for line in f:
         try:
             l = line.split(":")
-            q[l[0]] = l[1].strip()
+            q[l[0].strip()] = l[1].strip()
         except:
             print("oops")
     question = input("Enter question:\n")
