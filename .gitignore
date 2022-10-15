@@ -123,3 +123,4 @@ var/
 venv.bak/
 venv/
 wheels/
+.DS_Store
